@@ -4,3 +4,9 @@ block content
   h1= title
   p Welcome to #{title}
   p this is a #{title2}
+
+  p 数据库用户列表:
+  ul
+  each item,i  in users
+    li #{i}: #{item}
+    br
