@@ -1,0 +1,12 @@
+{
+  "vue.features.codeActions.enable": false,
+  "vue.codeActions.enabled": false,
+  "prettier.requireConfig": false,
+  "compile-hero.config": "",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnPaste": false
+}
