@@ -10,8 +10,6 @@ const { jwtSecretKey } = require("../utils/jwt");
 /* GET home page. */
 
 router.post("/login", async (req, res, next) => {
-  User.remove({});
-
   const { username, password } = req.body;
   console.log("username, password: ", username, password);
   const responseData = { code: 2, message: "success" };
@@ -54,7 +52,6 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/register", async (req, res, next) => {
-  console.log("req: ", req);
   const { username, password } = req.body;
   const responseData = { code: 2, message: "error" };
   console.log("username, password: ", username, password);
