@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login & Register</title>
+    <style>
+      #register-form,
+      #login-form {
+        display: none;
+      }
+    </style>
+    <script>
+      function go(params) {
+        location.assign("/users");
+        // window.history.pushState(null, null, '/users');
+      }
+      // 切换表单显示
+      function toggleForm(formId) {
+        document.getElementById("register-form").style.display = "none";
+        document.getElementById("login-form").style.display = "none";
+
+        document.getElementById(formId).style.display = "block";
+      }
+
+      // 登录验证
+      function login() {
+        // 获取输入的用户名和密码
+        var username = document.getElementById("login-username").value;
+        var password = document.getElementById("login-password").value;
+        if (!username || !password) {
+          return;
+        }
+        const url = location.origin + "/user/login";
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        const options = {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({ username, password }),
+        };
+
+        // 发起 POST 请求
+        fetch(url, options)
+          .then(async (response) => {
+            const res = await response.json().catch(() => {});
+            console.log("res: ", res);
+            if (res?.code === 200) {
+              alert("success");
+            } else {
+              alert("error");
+            }
+          })
+          .catch((error) => {
+            console.log("error: ", error);
+            // 异常处理
+            alert("error");
+          });
+      }
+
+      // 注册提交
+      function register() {
+        // 获取输入的用户名和密码
+        var username = document.getElementById("register-username").value;
+        var password = document.getElementById("register-password").value;
+        if (!username || !password) {
+          return;
+        }
+        const url = location.origin + "/user/register";
+
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        const options = {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({ username, password }),
+        };
+
+        // 发起 POST 请求
+        fetch(url, options)
+          .then(async (response) => {
+            const res = await response.json().catch(() => {});
+            console.log("res: ", res);
+            if (res?.code === 200) {
+              alert("success");
+            } else {
+              alert("error");
+            }
+          })
+          .catch((error) => {
+            console.log("error: ", error);
+            // 异常处理
+            alert("error");
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Login & Register</h1>
+
+    <button onclick="toggleForm('login-form')">登录</button>
+    <button onclick="toggleForm('register-form')">注册</button>
+
+    <button onclick="go()">用户列表</button>
+
+    <form id="login-form">
+      <h2>登录</h2>
+      <input type="text" id="login-username" placeholder="用户名" required />
+      <input type="password" id="login-password" placeholder="密码" required />
+      <button type="button" onclick="login()">登录</button>
+    </form>
+
+    <form id="register-form">
+      <h2>注册</h2>
+      <input type="text" id="register-username" placeholder="用户名" required />
+      <input
+        type="password"
+        id="register-password"
+        placeholder="密码"
+        required
+      />
+      <button type="button" onclick="register()">注册</button>
+    </form>
+  </body>
+</html>

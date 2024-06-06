@@ -26,8 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // 拦截路由中间件
-const whitelist = ["/", "/users", "/login"];
+const whitelist = ["/", "/users", "/user/login", "/user/register"];
 const interceptorMiddleware = (req, res, next) => {
+  console.log("req.path :>> ", req.path);
   if (whitelist.includes(req.path)) {
     return next();
   } else {
@@ -48,7 +49,7 @@ const interceptorMiddleware = (req, res, next) => {
 app.use(interceptorMiddleware);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", login);
+app.use("/user", login);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -65,12 +66,17 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
+// .connect("mongodb://localhost:27017/express-demo")
 mongoose
-  .connect("mongodb://localhost:27017/blog")
+  .connect("mongodb://49.235.101.249:27017/express-demo")
   .then(() => console.log("Connected!"))
   .catch((err) => {
     console.log("数据库连接失败...", err);
   });
+// const conn = mongoose.createConnection(
+//   "mongodb://49.235.101.249:27017/express-demo"
+// );
+// // Deletes the entire 'mydb' database
+// conn.dropDatabase();
 
 module.exports = app;
