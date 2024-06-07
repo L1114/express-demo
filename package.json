@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "master": "node ./bin/www"
+    "master": "node ./bin/www",
+    "docs": "apidoc -i routes/ -o apidoc/"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -19,6 +20,7 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
+    "apidoc": "^1.2.0",
     "nodemon": "^3.1.3"
   }
 }

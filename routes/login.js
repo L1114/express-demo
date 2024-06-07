@@ -7,8 +7,19 @@ const jwt = require("jsonwebtoken");
 var User = require("../models/User");
 const { jwtSecretKey } = require("../utils/jwt");
 
-/* GET home page. */
-
+/**
+ * @api {post} /user/login 登录
+ * @apiName 用户登录接口apiName
+ * @apiGroup User
+ * @apiDescription 用户登录接口apiDescription
+ * @apiBody {String} username 用户名
+ * @apiBody {String} password 密码
+ * @apiSampleRequest http://49.235.101.249:3000/login
+ *
+ * @apiSuccess {String}  code
+ * @apiSuccess {String}  message
+ * @apiSuccess {String}  token
+ */
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   console.log("username, password: ", username, password);
@@ -50,7 +61,17 @@ router.post("/login", async (req, res, next) => {
   responseData.code = 200;
   res.send(responseData);
 });
-
+/**
+ * @api {post} /user/register 注册
+ * @apiName 用户注册接口apiName
+ * @apiGroup User
+ * @apiDescription 用户注册接口apiDescription
+ * @apiBody {String} username 用户名
+ * @apiBody {String} password 密码
+ *
+ * @apiSuccess {String}  code
+ * @apiSuccess {String}  message
+ */
 router.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
   const responseData = { code: 2, message: "error" };

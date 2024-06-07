@@ -9,8 +9,8 @@
       }
     </style>
     <script>
-      function go(params) {
-        location.assign("/users");
+      function go(url) {
+        location.assign(url);
         // window.history.pushState(null, null, '/users');
       }
       // 切换表单显示
@@ -99,7 +99,9 @@
     <button onclick="toggleForm('login-form')">登录</button>
     <button onclick="toggleForm('register-form')">注册</button>
 
-    <button onclick="go()">用户列表</button>
+    <button onclick="go('/users')">用户列表</button>
+
+    <button onclick="go('/docs')">接口文档</button>
 
     <form id="login-form">
       <h2>登录</h2>

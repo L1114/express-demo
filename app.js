@@ -24,11 +24,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/assets", express.static(path.join(__dirname, "apidoc/assets")));
 
 // 拦截路由中间件
-const whitelist = ["/", "/users", "/user/login", "/user/register"];
+const whitelist = ["/", "/docs", "/users", "/user/login", "/user/register"];
 const interceptorMiddleware = (req, res, next) => {
-  console.log("req.path :>> ", req.path);
+  console.log("req.path--- :>> ", req.path);
+
   if (whitelist.includes(req.path)) {
     return next();
   } else {
